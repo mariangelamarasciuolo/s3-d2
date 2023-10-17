@@ -29,7 +29,25 @@ public class EventoDAO {
 
     public void findByIdAndDelete(long id) {
         Evento found = em.find(Evento.class, id);
-        
-    }
+        if (found != null) {
+            // 2. Se lo studente c'è, lo elimino
 
+            // 2.1 Ottengo la transazione
+            EntityTransaction transaction = em.getTransaction();
+
+            // 2.2 Faccio partire la transazione
+            transaction.begin();
+
+            // 2.3 Rimuovo l'oggetto dal persistence context
+            em.remove(found);
+
+            // 2.4 Faccio il commit della transazione per persistere a db l'operazione
+            transaction.commit();
+            System.out.println("Lo studente è stato cancellato correttamente");
+        } else {
+            // 3. Altrimenti --> "Student not found"
+            System.err.println("Lo studente con l'id " + id + " non è stato trovato");
+        }
+
+    }
 }
