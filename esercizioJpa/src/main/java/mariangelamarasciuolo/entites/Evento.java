@@ -71,4 +71,6 @@ public class Evento {
     public void setNumero_max_partecipanti(int numero_max_partecipanti) {
         this.numero_max_partecipanti = numero_max_partecipanti;
     }
+
+   
 }
